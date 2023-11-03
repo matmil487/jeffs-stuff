@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: shopping-api
+  namespace: hypertheory
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: shopping-api
+  
+  template:
+    metadata:
+      labels:
+        app: shopping-api
+    spec:
+      
+      containers:
+      - name: shopping-api
+        image: jeffrygonzalez/shopping-api-nov-2023:v1.1
+        env:
+          - name: ConnectionStrings__database
+            value: "another fake again"
+        resources:
+          limits:
+            memory: "256Mi"
+            cpu: "500m"
+          requests:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 80
